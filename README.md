@@ -19,8 +19,8 @@ _Run button clears all lists/variables/outputs if nothing is typed on screen_
 
 print - prints whatever is following it up until the next semi-colon(I.E. print Hello World;) Result is "Hello World".
 
-int - stores whatever variables is following the equal sign, up until the next semi-colon (I.E. int variable = 10;) Result is variable stores the value of 10. 
-If you use- print variable; Result is 10.
+int - stores whatever integer is following the equal sign, must end with semi-colon (I.E. int testVar = 10;) Result is 'testVar' stores the value of 10. 
+If you use- print testVar; Result is 10.
 
 
 
