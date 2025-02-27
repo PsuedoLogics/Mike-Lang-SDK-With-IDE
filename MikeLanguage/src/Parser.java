@@ -6,11 +6,13 @@ import java.util.Hashtable;
 
 public class Parser {
 
-    public ArrayList<String> output = new ArrayList<>();
+    private ArrayList<String> output = new ArrayList<>();
 
-    public ArrayList<String> codeList = new ArrayList<>();
+    private ArrayList<String> codeList = new ArrayList<>();
 
-    public ArrayList<String> integerList = new ArrayList<>();
+    private ArrayList<String> integerList = new ArrayList<>();
+
+    private String stringToDoMathOn;
 
     public Dictionary<String, Integer> integerVariables = new Hashtable<>();
 
@@ -24,7 +26,7 @@ public class Parser {
     public void PrintCode(String codeToProcess) {
 
         ClearCode();
-
+        codeToProcess = codeToProcess.replace("\n", " ");
         String[] codeArray = codeToProcess.split(";");
         codeList.addAll(Arrays.asList(codeArray));
 
@@ -46,11 +48,17 @@ public class Parser {
                {
                    if(lineOfCode[l+2].equalsIgnoreCase("="))
                    {
+
+
+                        System.out.println( "Variable type: " + lineOfCode[l] + " Variable Name: "+ lineOfCode[l+1] + " Operator: "+ lineOfCode[l+2] + " Saved Value: " + lineOfCode[l+3]);
+
+
                        integerVariables.put(lineOfCode[l+1], Integer.parseInt(lineOfCode[l+3]));
 
                        integerList.add(lineOfCode[l + 1]);
                    }
                }
+
             }
         }
     }
@@ -58,6 +66,13 @@ public class Parser {
    public void ProcessCode()
    {
             for(String code : codeList) {
+
+                if(code.contains("+") || code.contains("-") || code.contains("*") || code.contains("/"))
+                {
+                    stringToDoMathOn = code;
+                    DoMath();
+                }
+
                 if (code.contains("print"))
                 {
 
@@ -91,6 +106,37 @@ public class Parser {
        Main.outputLabel.setText(temp);
    }
 
+   public void DoMath()
+   {
+
+       for(char c: stringToDoMathOn.toCharArray())
+       {
+           if(c == '+')
+           {
+               String[] additionStrings = stringToDoMathOn.split("\\+");
+               additionStrings[0] = additionStrings[0].trim();
+               additionStrings[1] = additionStrings[1].trim();
+
+               for(String var : integerList)
+               {
+                   if(additionStrings[0].contains(var))
+                       additionStrings[0] = integerVariables.get(var).toString();
+                   if(additionStrings[1].contains(var))
+                       additionStrings[1] = integerVariables.get(var).toString();
+               }
+
+               try {
+                   int out = Integer.parseInt(additionStrings[0]) + Integer.parseInt(additionStrings[1]);
+                   output.add(String.valueOf(out));
+               }
+               catch(Exception e) {
+                   output.add(e + " variable does not exist...");
+               }
+
+           }
+       }
+
+   }
 
 
 }
