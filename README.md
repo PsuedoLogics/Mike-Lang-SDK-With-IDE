@@ -1,16 +1,18 @@
 # Mike Lang w/ IDE
 _Simple programming language built on Java with Swing UI for the IDE_
 
-## Project Purpose
+## All programming and development by Michael Mathews 2025
+
+# Project Purpose
 To build a language without reference in order to glean insights, see what route I would take, and most importantly to pull my hair out (it has actually been fun).
 
 ### To run the project
 
-Download project files
+1.) Download project files
 
-Run the main
+2.) Run the main
 
-Enjoy. Will update as language grows. 
+3.) Enjoy. Will update as language grows. 
 
 # SYNTAX
 _Semi-colon based language (must end all statements with semi-colon)_
